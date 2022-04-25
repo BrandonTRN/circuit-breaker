@@ -1,0 +1,37 @@
+
+server:
+  servlet:
+     context-path: /circuit-breaker
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      circuitBreakerService:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        waitDurationInOpenState: 5s
+        slidingWindowType: COUNT_BASED
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
