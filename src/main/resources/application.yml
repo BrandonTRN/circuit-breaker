@@ -7,7 +7,9 @@ feign:
   client:
     config:
       default:
-        loggerLevel: full
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
 
 
 resilience4j:

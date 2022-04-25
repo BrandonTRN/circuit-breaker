@@ -30,7 +30,7 @@ public class CircuitBreackerController {
     }
 
     @GetMapping(value = "/seleccionaPost/{pIdPost}", produces = "application/json")
-    @CircuitBreaker(name = NAME_CIRCUIT_BREAKER, fallbackMethod = "metodoAResponderEnFallo")
+   @CircuitBreaker(name = NAME_CIRCUIT_BREAKER, fallbackMethod = "metodoAResponderEnFallo")
     public ResponseEntity<PostDTO> buscaAlmacen(@PathVariable(value = "pIdPost") Long pIdPost) {
         return ResponseEntity.ok().body(circuitBreakerService.getPostById(pIdPost));
     }
